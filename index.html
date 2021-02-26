@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+    <title>API Countries</title>
+</head>
+<body>
+
+    <header>
+        <h2>Where in the world?</h2>
+        <button id="mode"><i class="far fa-moon"></i>Dark Mode</button>
+    </header>
+
+    <main class="container">
+
+        <section class="buscador">
+            <div class="icono">
+                <input type="text" id="pais" placeholder="Search for a country...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div class="select">
+                <select name="continente" id="continente">
+                    <option hidden selected>Filter by Region</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Americas">America</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Europe">Europa</option>
+                    <option value="Oceania">Oceania</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="coleccion">
+
+            <!-- <article class="pais">
+                <div>
+                    <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fflagpedia.net%2Fdata%2Fflags%2Fbig%2Far.png&f=1&nofb=1" alt="">
+                </div>
+                <div class="descripcion">
+                    <h3><b>Argentina</b></h3>
+                    <p class="pop">Population: </p>
+                    <p class="reg">Region: </p>
+                    <p class="cap">Capital: </p>
+                </div>
+            </article> -->
+
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

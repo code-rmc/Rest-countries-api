@@ -1,0 +1,260 @@
+@import url('normalize.css');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+
+$Dark-Blue:hsl(209, 23%, 22%);      // (Dark Mode Elements)
+$Very-Dark-Blue: hsl(207, 26%, 17%);// (Dark Mode Background)
+$Very-Dark: hsl(200, 15%, 8%);      // (Light Mode Text)
+$Dark-Gray: hsl(0, 0%, 52%);        // (Light Mode Input)
+$Very-Light-Gray: hsl(0, 0%, 98%);  // (Light Mode Background)
+$White: hsl(0, 0%, 100%);           // (Dark Mode Text & Light Mode Elements)
+
+body{
+    font-family: 'Nunito Sans','Times New Roman', Times, serif;
+    background-color: $Very-Light-Gray;
+    color: $Very-Dark;
+    transition: .3s ease all;
+    &.dark{
+        background-color: $Very-Dark-Blue;
+        color: $White;
+        & a{
+            color: $White;
+            box-shadow: none;
+            background-color: $Dark-Blue;
+            &:visited{
+                color: $White;
+                background-color: $Dark-Blue;
+            }
+        }
+    }
+    & a{
+        text-decoration: none;
+        color: $Very-Dark;
+        background-color: $White;
+        box-shadow: 0px 0px 5px $Dark-Gray;
+        margin-bottom: 50px;
+        &:visited{
+            color: $Very-Dark;
+        }
+    }
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    box-shadow: 1px 0px 5px -2px $Dark-Gray;
+    padding: 0 50px;
+    font-size: 0.9em;
+
+    body.dark &{
+        background-color: $Dark-Blue;
+        #mode{
+            color: $White;
+        }
+    }
+
+    #mode{
+        color: $Very-Dark;
+        font-weight: 600;
+        cursor: pointer;
+        background-color: transparent;
+        border: 0;
+        i{
+            margin-right: 7px;
+        }
+    }
+}
+
+.container{
+    margin: 0 50px;
+
+    .buscador{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        margin: 55px 0 55px 0;
+        .icono{
+            position: relative;
+            width: 30%;
+            i{
+                position: absolute;
+                top: 17px;
+                left: 15px;
+            }
+            input{
+                color: $Dark-Blue;
+                width: 100%;
+                padding: 15px;
+                padding-left: 45px;
+                border-radius: 5px;
+                border: none;
+                box-shadow: 0px 0px 5px -2px $Dark-Gray;
+                &:focus-visible{
+                    border-radius: 5px;
+                    border: none;
+                }
+                body.dark &{
+                    background-color: $Dark-Blue;
+                    color: $White;
+                    box-shadow: none;
+                    ::placeholder{
+                        color: $White;
+                    }
+                }
+            }
+        }
+
+        select{
+            padding: 15px;
+            background-color: $White;
+            appearance: none;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px $Dark-Gray;
+            //dark
+            body.dark &{
+                background-color: $Dark-Blue;
+                color: $White;
+                box-shadow: none;
+            }
+        }
+        select option{
+            border: 50px solid #4565;
+        }
+        .select{
+            width: 15%;
+            display: grid;
+            grid-template-areas: "select";
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+
+            select,&::after {
+                grid-area: select;
+            }
+
+            // Custom arrow
+            &:not(.select--multiple)::after {
+                content: "";
+                justify-self: right;
+                margin-right: 10px;
+                width: 0.8em;
+                height: 0.5em;
+                background-color: $Dark-Blue;
+                clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+                body.dark &{
+                    background-color: $White;
+                }
+            }
+        }
+    }
+    .coleccion{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        a{
+            .pais{
+                width: 250px;
+                box-shadow: 0px 0px 5px $Dark-Gray;
+                margin: auto;
+                //
+                body.dark &{
+                    box-shadow: none;
+                }
+                h3{
+                    font-size: 18px;
+                }
+                img{
+                    width: 100%;
+                    height: 170px;
+                    object-fit: cover;
+                }
+                .descripcion{
+                    padding: 0px 20px 20px;
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 500px){
+    header{
+        padding: 15px 15px;
+        font-size: 0.8em;
+    }
+    .container{
+        margin: 0 25px;
+        .buscador{
+            flex-direction: column;
+            flex-wrap:nowrap;
+            align-items: flex-start;
+            .icono{
+                width: 85%;
+                input{
+                    margin-bottom: 50px;
+                }
+            }
+            .select{
+                width: 50%;
+            }
+        }
+    }
+}
+
+.c-back{
+    margin-top: 50px;
+    #back{
+        font-weight: 300;
+        font-size: 0.8em;
+        cursor: pointer;
+        border: 0;
+        border-radius: 5px;
+        padding: 7px 25px 7px 25px;
+        i{
+            margin-right: 10px;
+        }
+    }
+}
+
+#country{
+    display: flex;
+    margin-top: 50px;
+    .bandera{
+        width: 50%;
+        padding-right: 80px;
+        img{
+            width: 100%;
+        }
+    }
+    .info{
+        width: 50%;
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        .info-1{
+            grid-area: 1 / 1 / 2 / 6;
+            h3{
+                font-size: 1.5em;
+            }
+        }
+        .info-2{
+            grid-area: 2 / 1 / 4 / 3;
+        }
+        .info-3{
+            grid-area: 2 / 3 / 4 / 5;
+        }
+        .info-4{
+            grid-area: 4 / 1 / 5 / 5;
+        }
+        p{
+            font-size: 00.8em;
+            font-weight: 600;
+        }
+    }
+}

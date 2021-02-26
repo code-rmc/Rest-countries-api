@@ -1,0 +1,13 @@
+﻿.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
+*.sketch
+
+*.xd
+
+*.fig
+
+README.md
+style-guide.md
