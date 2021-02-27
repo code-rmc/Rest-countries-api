@@ -28,7 +28,6 @@ selectCont.addEventListener('change', e => {
 
 
 async function envio(uri) {
-
     try {
         const res = await fetch(uri);
         const countries = await res.json();
@@ -37,19 +36,6 @@ async function envio(uri) {
     } catch (err) {
         console.error(err.message);
     }
-
-    /*
-    fetch(uri)
-    .then( res => res.ok ? res.json() : console.log("error") )
-    .then( (res) => {
-        let countries = res;
-        cleanCountry();
-        createCountry(countries);
-    })
-    .catch( error =>
-        console.error(error);
-    );
-    */
 }
 
 function createCountry(countries) {
@@ -69,7 +55,7 @@ function createCountry(countries) {
         let atta = document.createAttribute("href");
 
         att.value = land.flag;
-        atta.value = `http://127.0.0.1:5500/country.html`; // ${land.name}
+        atta.value = `http://127.0.0.1:5500/country.html?name=${land.name.toLowerCase()}`;
 
         img.setAttributeNode(att);
         a.setAttributeNode(atta);
@@ -89,51 +75,6 @@ function createCountry(countries) {
         a.append(country);
         coleccion.append(a);
     };
-}
-
-function countryName(land) {
-    let section1 = `
-        <section class="bandera">
-            <img src="${land.flag}" alt="">
-        </section>
-    `;
-
-    let info = document.createElement("section");
-    info.classList.add("info");
-    /* `
-            <div class="info-3">
-                <p>Top Level Domain: ${land.topLevelDomain}</p>
-                <p>Currencies: ${land.currencies[1]}</p>
-                <p>Languages: ${land.languages[]}</p>
-            </div>
-
-            <div class="info-4">
-                <p>Border Countries: ${land.borders}</p>
-            </div>
-    `; */
-    let leng = document.createElement(p);
-    leng.textContent = "Languages: ";
-    land.languages.forEach(idioma => {
-        leng.textContent += idioma;
-    });
-
-    console.log(lend);
-
-    let info1 = `<div class="info-1">
-                    <h3>${land.name}</h3>
-                </div>`;
-    let info2 = `<div class="info-2">
-                    <p>Native Name: ${land.nativeName}</p>
-                    <p>Population: ${new Intl.NumberFormat("de-DE").format(land.population)}</p>
-                    <p>Region: ${land.region}</p>
-                    <p>Sub Region: ${land.subregion}</p>
-                    <p>Capital: ${land.capital}</p>
-                </div>`;
-    let info3 = ``;
-    let info4 = ``;
-
-    info.append(info1,info2,info3,info4);
-    document.querySelector("country").append(section1,info);
 }
 
 function cleanCountry() {
