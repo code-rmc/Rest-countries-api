@@ -62,11 +62,14 @@ function countryName(land) {
                 </div>`;
 
     let listborder="";
-
-    land[0].borders.forEach(id => listborder += `<span class="bulge">${id}</span>` );
+ 
+    land[0].borders.forEach(id => listborder += `<span class="border">${id}</span>` );
 
     let info4 = `<div class="info-4">
-                    <p><b>Border Countries:</b> ${listborder}</p>
+                    <p><b>Border Countries:</b> </p>
+                    <div class="cont-border">
+                        ${listborder}
+                    </div>
                 </div>`;
 
     info.innerHTML = info1;

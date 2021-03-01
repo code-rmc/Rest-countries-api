@@ -3,6 +3,13 @@ let selectCont = document.querySelector("#continente");
 const inputCountry = document.querySelector("#pais");
 let continent, uri;
 
+window.addEventListener("load", () => {
+    inputCountry.value = "";
+    selectCont.selectedOptions = selectCont.options[0];
+    console.log(selectCont);
+
+})
+// light and dark mode
 mode.addEventListener("click", (e) => {
     console.log(e.currentTarget);
     document.body.classList.toggle("dark");
@@ -11,14 +18,21 @@ mode.addEventListener("click", (e) => {
     }else{
         mode.childNodes[0].className = "fas fa-moon";
     }
-})
+});
 
-inputCountry.addEventListener("keypress", (e) => {
-    if (e.key === 'Enter') {
-        uri = `https://restcountries.eu/rest/v2/name/${inputCountry.value}`;
-        envio(uri)
-    }
-})
+const search = data => inputCountry.addEventListener("keyup", () => {
+
+    let pais = inputCountry.value.toLowerCase();
+    cleanCountry();
+    let filtro = data.filter( item => {
+        let comparar = item.name.toLowerCase();
+        if( comparar.indexOf(pais) !== -1 ){
+            return item;
+        }
+    })
+    createCountry( filtro );
+
+});
 
 selectCont.addEventListener('change', e => {
     continent = e.target.value;
@@ -33,13 +47,14 @@ async function envio(uri) {
         const countries = await res.json();
         cleanCountry();
         createCountry(countries);
+        search(countries);
     } catch (err) {
         console.error(err.message);
     }
 }
 
 function createCountry(countries) {
-
+    console.log(typeof(countries));
     for(land of countries)
     {
 
