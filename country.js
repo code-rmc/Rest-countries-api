@@ -15,7 +15,6 @@ async function envioCountry(url) {
 }
 
 function countryName(land) {
-    //console.log(land[0].languages[0]);
 
     let section1 = `
         <section class="bandera">
@@ -36,27 +35,45 @@ function countryName(land) {
                 <p>Border Countries: ${land.borders}</p>
             </div>
     `; */
-    let leng = document.createElement("p");
-    leng.textContent = "Languages: ";
-    for (let id of land[0].languages) {
-        leng.textContent += id.name;
-    }
 
     let info1 = `<div class="info-1">
                     <h3>${land[0].name}</h3>
-                </div>`;
-    let info2 = `<div class="info-2">
-                    <p>Native Name: ${land[0].nativeName}</p>
-                    <p>Population: ${new Intl.NumberFormat("de-DE").format(land[0].population)}</p>
-                    <p>Region: ${land[0].region}</p>
-                    <p>Sub Region: ${land[0].subregion}</p>
-                    <p>Capital: ${land[0].capital}</p>
-                </div>`;
-    // let info3 = ``;
-    // let info4 = ``;
+        </div>`;
 
-    info.append(info1,info2);
-    console.log("INFO",info.target  );
-    document.querySelector("#country").innerHTML= section1;
-    document.querySelector("#country").innerHTML+= info;
+    let info2 = `<div class="info-2">
+                    <p><b>Native Name:</b> ${land[0].nativeName}</p>
+                    <p><b>Population:</b> ${new Intl.NumberFormat("de-DE").format(land[0].population)}</p>
+                    <p><b>Region:</b> ${land[0].region}</p>
+                    <p><b>Sub Region:</b> ${land[0].subregion}</p>
+                    <p><b>Capital:</b> ${land[0].capital}</p>
+                </div>`;
+
+    let leng = document.createElement("p");
+
+    for (const id in land[0].languages) {
+        if(id != 0) leng.textContent += ", ";
+        leng.textContent += land[0].languages[id].name;
+    }
+
+    let info3 = `<div class="info-3">
+                    <p><b>Top Level Domain:</b> ${land[0].topLevelDomain}</p>
+                    <p><b>Currencies:</b> ${land[0].currencies[0].name}</p>
+                    <p><b>Lenguages:</b> ${leng.textContent}</p>
+                </div>`;
+
+    let listborder="";
+
+    land[0].borders.forEach(id => listborder += `<span class="bulge">${id}</span>` );
+
+    let info4 = `<div class="info-4">
+                    <p><b>Border Countries:</b> ${listborder}</p>
+                </div>`;
+
+    info.innerHTML = info1;
+    info.innerHTML += info2;
+    info.innerHTML += info3;
+    info.innerHTML += info4;
+
+    document.querySelector("#country").innerHTML = section1;
+    document.querySelector("#country").append(info);
 }

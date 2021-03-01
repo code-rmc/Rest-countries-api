@@ -55,7 +55,7 @@ function createCountry(countries) {
         let atta = document.createAttribute("href");
 
         att.value = land.flag;
-        atta.value = `http://127.0.0.1:5500/country.html?name=${land.name.toLowerCase()}`;
+        atta.value = `country.html?name=${land.name.toLowerCase()}`;
 
         img.setAttributeNode(att);
         a.setAttributeNode(atta);
@@ -63,7 +63,7 @@ function createCountry(countries) {
 
         desc.className = "descripcion";
         desc.innerHTML = `
-            <h3><b>${land.name}</b></h3>
+            <h3>${land.name}</h3>
             <p class="pop">Population: ${new Intl.NumberFormat("de-DE").format(land.population)}</p>
             <p class="reg">Region: ${land.region}</p>
             <p class="cap">Capital: ${land.capital}</p>
