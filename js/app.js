@@ -6,18 +6,26 @@ let continent, uri;
 window.addEventListener("load", () => {
     inputCountry.value = "";
     selectCont.selectedOptions = selectCont.options[0];
-    envio("https://restcountries.eu/rest/v2/all");
+    send("https://restcountries.eu/rest/v2/all");
 })
 
 // light and dark mode
 mode.addEventListener("click", (e) => {
     document.body.classList.toggle("dark");
-    if (mode.childNodes[0].className == "fas fa-moon") {
+    if ( mode.childNodes[0].className == "fas fa-moon" ) {
         mode.childNodes[0].className = "far fa-moon";
+        localStorage.setItem('dark-mode', 'false');
     }else{
         mode.childNodes[0].className = "fas fa-moon";
+        localStorage.setItem('dark-mode', 'true');
     }
 });
+
+if (localStorage.getItem('dark-mode') === "true") {
+    document.body.classList.add("dark");
+    mode.childNodes[0].className = "fas fa-moon";
+}
+
 
 const search = data => inputCountry.addEventListener("keyup", () => {
 
@@ -32,6 +40,8 @@ const search = data => inputCountry.addEventListener("keyup", () => {
     createCountry( filtro );
 });
 
+
+
 selectCont.addEventListener('change', e => {
     continent = e.target.value;
     if (continent == "all") {
@@ -39,11 +49,11 @@ selectCont.addEventListener('change', e => {
     } else {
         uri = `https://restcountries.eu/rest/v2/region/${continent}`;
     }
-    envio(uri);
+    send(uri);
 });
 
 
-async function envio(uri) {
+async function send(uri) {
     try {
         const res = await fetch(uri);
         const countries = await res.json();

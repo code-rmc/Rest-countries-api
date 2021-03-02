@@ -1,20 +1,28 @@
-// Paramatro enviado por URL
+// Parametro enviado por URL
 const query = new URLSearchParams(window.location.search);
-console.log( query.get('name') );
 
 if ( query.get('name') ) {
     let name = query.get('name');
     let url = `https://restcountries.eu/rest/v2/name/${name}`;
-    envioCountry(url);
+    sendCountry(url);
+}else{
+    let code = query.get('code');
+    let url = `https://restcountries.eu/rest/v2/alpha/${code}`;
+    sendCountry(url);
 }
 
-async function envioCountry(url) {
-    const res = await fetch(url);
-    const country = await res.json();
-    countryName(country);
+async function sendCountry(url) {
+    try {
+        const res = await fetch(url);
+        const country = await res.json();
+        countryName(country);
+    } catch (err) {
+        console.error(err.message);
+    }
 }
 
 function countryName(land) {
+    if ( query.get('code') ) land = [land];
 
     let section1 = `
         <section class="bandera">
@@ -52,7 +60,7 @@ function countryName(land) {
 
     let listborder="";
 
-    land[0].borders.forEach(id => listborder += `<span class="border">${id}</span>` );
+    land[0].borders.forEach(id => listborder += `<a href="country.html?code=${id}" class="border">${id}</a>` );
 
     let info4 = `<div class="info-4">
                     <p><b>Border Countries:</b> </p>
