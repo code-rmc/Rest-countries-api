@@ -24,17 +24,6 @@ function countryName(land) {
 
     let info = document.createElement("section");
     info.classList.add("info");
-    /* `
-            <div class="info-3">
-                <p>Top Level Domain: ${land.topLevelDomain}</p>
-                <p>Currencies: ${land.currencies[1]}</p>
-                <p>Languages: ${land.languages[]}</p>
-            </div>
-
-            <div class="info-4">
-                <p>Border Countries: ${land.borders}</p>
-            </div>
-    `; */
 
     let info1 = `<div class="info-1">
                     <h3>${land[0].name}</h3>
@@ -62,7 +51,7 @@ function countryName(land) {
                 </div>`;
 
     let listborder="";
- 
+
     land[0].borders.forEach(id => listborder += `<span class="border">${id}</span>` );
 
     let info4 = `<div class="info-4">

@@ -6,12 +6,11 @@ let continent, uri;
 window.addEventListener("load", () => {
     inputCountry.value = "";
     selectCont.selectedOptions = selectCont.options[0];
-    console.log(selectCont);
-
+    envio("https://restcountries.eu/rest/v2/all");
 })
+
 // light and dark mode
 mode.addEventListener("click", (e) => {
-    console.log(e.currentTarget);
     document.body.classList.toggle("dark");
     if (mode.childNodes[0].className == "fas fa-moon") {
         mode.childNodes[0].className = "far fa-moon";
@@ -22,8 +21,8 @@ mode.addEventListener("click", (e) => {
 
 const search = data => inputCountry.addEventListener("keyup", () => {
 
-    let pais = inputCountry.value.toLowerCase();
     cleanCountry();
+    let pais = inputCountry.value.toLowerCase();
     let filtro = data.filter( item => {
         let comparar = item.name.toLowerCase();
         if( comparar.indexOf(pais) !== -1 ){
@@ -31,12 +30,15 @@ const search = data => inputCountry.addEventListener("keyup", () => {
         }
     })
     createCountry( filtro );
-
 });
 
 selectCont.addEventListener('change', e => {
     continent = e.target.value;
-    uri = `https://restcountries.eu/rest/v2/region/${continent}`;
+    if (continent == "all") {
+        uri = `https://restcountries.eu/rest/v2/all`;
+    } else {
+        uri = `https://restcountries.eu/rest/v2/region/${continent}`;
+    }
     envio(uri);
 });
 
@@ -54,10 +56,9 @@ async function envio(uri) {
 }
 
 function createCountry(countries) {
-    console.log(typeof(countries));
+
     for(land of countries)
     {
-
         const coleccion = document.querySelector(".coleccion");
         let country = document.createElement("article");
 
