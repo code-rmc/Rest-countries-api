@@ -1,5 +1,9 @@
 @import url("normalize.css");
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
+b {
+  font-weight: 600;
+}
+
 body {
   font-family: 'Nunito Sans','Times New Roman', Times, serif;
   background-color: #fafafa;
@@ -29,8 +33,6 @@ body a {
   text-decoration: none;
   color: #111517;
   background-color: white;
-  -webkit-box-shadow: 0px 0px 5px #858585;
-          box-shadow: 0px 0px 5px #858585;
   margin-bottom: 50px;
 }
 
@@ -49,8 +51,8 @@ header {
       -ms-flex-pack: justify;
           justify-content: space-between;
   height: 50px;
-  -webkit-box-shadow: 1px 0px 5px -2px #858585;
-          box-shadow: 1px 0px 5px -2px #858585;
+  -webkit-box-shadow: 1px 0px 5px -2px #b3b3b3;
+          box-shadow: 1px 0px 5px -2px #b3b3b3;
   padding: 0 50px;
   font-size: 0.9em;
 }
@@ -103,6 +105,7 @@ header #mode i {
   position: absolute;
   top: 17px;
   left: 15px;
+  color: #b3b3b3;
 }
 
 .container .buscador .icono input {
@@ -112,8 +115,8 @@ header #mode i {
   padding-left: 45px;
   border-radius: 5px;
   border: none;
-  -webkit-box-shadow: 0px 0px 5px -2px #858585;
-          box-shadow: 0px 0px 5px -2px #858585;
+  -webkit-box-shadow: 0px 0px 5px -1px #b3b3b3;
+          box-shadow: 0px 0px 5px -1px #b3b3b3;
 }
 
 .container .buscador .icono input:focus-visible {
@@ -152,8 +155,8 @@ body.dark .container .buscador .icono input ::placeholder {
           appearance: none;
   border: none;
   border-radius: 5px;
-  -webkit-box-shadow: 0px 0px 5px #858585;
-          box-shadow: 0px 0px 5px #858585;
+  -webkit-box-shadow: 0px 0px 5px -1px #b3b3b3;
+          box-shadow: 0px 0px 5px -1px #b3b3b3;
 }
 
 body.dark .container .buscador select {
@@ -215,8 +218,8 @@ body.dark .container .buscador .select:not(.select--multiple)::after {
 .container .coleccion a .pais {
   height: 100%;
   width: 250px;
-  -webkit-box-shadow: 0px 0px 5px #858585;
-          box-shadow: 0px 0px 5px #858585;
+  -webkit-box-shadow: 0px 0px 5px #b3b3b3;
+          box-shadow: 0px 0px 5px #b3b3b3;
   margin: auto;
 }
 
@@ -237,11 +240,15 @@ body.dark .container .coleccion a .pais {
 }
 
 .container .coleccion a .pais .descripcion {
-  padding: 0px 20px 20px;
+  padding: 0px 20px 30px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
+/* *****************************************
+    Pagina por piases (country.html)
+   -----------------------------------------
+*/
 .c-back {
   margin-top: 50px;
 }
@@ -253,6 +260,13 @@ body.dark .container .coleccion a .pais {
   border: 0;
   border-radius: 5px;
   padding: 7px 25px 7px 25px;
+  -webkit-box-shadow: 0px 0px 5px -1px #b3b3b3;
+          box-shadow: 0px 0px 5px -1px #b3b3b3;
+}
+
+body.dark .c-back #back {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .c-back #back i {
@@ -346,8 +360,8 @@ body.dark .container .coleccion a .pais {
 #country .info .info-4 .cont-border .border {
   font-weight: 300;
   font-size: 0.6em;
-  -webkit-box-shadow: 0px 0px 5px #858585;
-          box-shadow: 0px 0px 5px #858585;
+  -webkit-box-shadow: 0px 0px 5px -1px #b3b3b3;
+          box-shadow: 0px 0px 5px -1px #b3b3b3;
   border-radius: 5px;
   margin: 10px;
   padding: 7px 25px 7px 25px;
@@ -362,13 +376,13 @@ body.dark #country .info .info-4 .cont-border .border {
 
 #country .info p {
   font-size: 00.8em;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 @media (max-width: 375px) {
   header {
     padding: 15px 15px;
-    font-size: 0.8em;
+    font-size: 0.7em;
   }
   .container {
     margin: 0 25px;
@@ -385,7 +399,7 @@ body.dark #country .info .info-4 .cont-border .border {
             align-items: flex-start;
   }
   .container .buscador .icono {
-    width: 85%;
+    width: 80%;
   }
   .container .buscador .icono input {
     margin-bottom: 50px;

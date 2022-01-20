@@ -1,13 +1,23 @@
 @import url('normalize.css');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
 
+// ***************************************
+// Variables de color
 $Dark-Blue:hsl(209, 23%, 22%);      // (Dark Mode Elements)
 $Very-Dark-Blue: hsl(207, 26%, 17%);// (Dark Mode Background)
 $Very-Dark: hsl(200, 15%, 8%);      // (Light Mode Text)
-$Dark-Gray: hsl(0, 0%, 52%);        // (Light Mode Input)
+$Dark-Gray: hsl(0, 0%, 70%);        // (Light Mode Input)
 $Very-Light-Gray: hsl(0, 0%, 98%);  // (Light Mode Background)
 $White: hsl(0, 0%, 100%);           // (Dark Mode Text & Light Mode Elements)
+// variables de tipo de letra
+$t-bold: 600;
+$t-media: 400;
+$t-lighter: 300;
+// ***************************************
 
+b{
+    font-weight: $t-bold;
+}
 body{
     font-family: 'Nunito Sans','Times New Roman', Times, serif;
     background-color: $Very-Light-Gray;
@@ -30,7 +40,6 @@ body{
         text-decoration: none;
         color: $Very-Dark;
         background-color: $White;
-        box-shadow: 0px 0px 5px $Dark-Gray;
         margin-bottom: 50px;
         &:visited{
             color: $Very-Dark;
@@ -56,7 +65,7 @@ header{
 
     #mode{
         color: $Very-Dark;
-        font-weight: 600;
+        font-weight: $t-bold;
         cursor: pointer;
         background-color: transparent;
         border: 0;
@@ -83,6 +92,7 @@ header{
                 position: absolute;
                 top: 17px;
                 left: 15px;
+                color: $Dark-Gray;
             }
             input{
                 color: $Dark-Blue;
@@ -91,7 +101,7 @@ header{
                 padding-left: 45px;
                 border-radius: 5px;
                 border: none;
-                box-shadow: 0px 0px 5px -2px $Dark-Gray;
+                box-shadow: 0px 0px 5px -1px $Dark-Gray;
                 &:focus-visible{
                     border-radius: 5px;
                     border: none;
@@ -113,7 +123,7 @@ header{
             appearance: none;
             border: none;
             border-radius: 5px;
-            box-shadow: 0px 0px 5px $Dark-Gray;
+            box-shadow: 0px 0px 5px -1px $Dark-Gray;
             //dark
             body.dark &{
                 background-color: $Dark-Blue;
@@ -173,9 +183,9 @@ header{
                     object-fit: fill;
                 }
                 .descripcion{
-                    padding: 0px 20px 20px;
+                    padding: 0px 20px 30px;
                     font-size: 12px;
-                    font-weight: 600;
+                    font-weight: $t-media;
                 }
             }
         }
@@ -189,12 +199,16 @@ header{
 .c-back{
     margin-top: 50px;
     #back{
-        font-weight: 300;
+        font-weight: $t-lighter;
         font-size: 0.8em;
         cursor: pointer;
         border: 0;
         border-radius: 5px;
         padding: 7px 25px 7px 25px;
+        box-shadow: 0px 0px 5px -1px $Dark-Gray;
+        body.dark &{
+                box-shadow: none;
+            }
         i{
             margin-right: 10px;
         }
@@ -240,9 +254,9 @@ header{
                 display: flex;
                 flex-wrap: wrap;
                 .border{
-                    font-weight: 300;
+                    font-weight: $t-lighter;
                     font-size: 0.6em;
-                    box-shadow: 0px 0px 5px $Dark-Gray;
+                    box-shadow: 0px 0px 5px -1px $Dark-Gray;
                     border-radius: 5px;
                     margin: 10px;
                     padding: 7px 25px 7px 25px;
@@ -256,7 +270,7 @@ header{
         }
         p{
             font-size: 00.8em;
-            font-weight: 600;
+            font-weight: $t-media;
         }
     }
 }
@@ -265,7 +279,7 @@ header{
 @media(max-width: 375px){
     header{
         padding: 15px 15px;
-        font-size: 0.8em;
+        font-size: 0.7em;
     }
     .container{
         margin: 0 25px;
@@ -274,7 +288,7 @@ header{
             flex-wrap:nowrap;
             align-items: flex-start;
             .icono{
-                width: 85%;
+                width: 80%;
                 input{
                     margin-bottom: 50px;
                 }

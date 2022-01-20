@@ -1,79 +1,79 @@
 // Parametro enviado por URL
 const query = new URLSearchParams(window.location.search);
 
-if ( query.get('name') ) {
-    let name = query.get('name');
-    let url = `https://restcountries.eu/rest/v2/name/${name}`;
-    sendCountry(url);
-}else{
-    let code = query.get('code');
-    let url = `https://restcountries.eu/rest/v2/alpha/${code}`;
-    sendCountry(url);
-}
-
-async function sendCountry(url) {
+const sendCountry = async (url) => {
     try {
         const res = await fetch(url);
         const country = await res.json();
         countryName(country);
     } catch (err) {
-        console.error(err.message);
+        console.error("Ha ocurrido un Error - Detalle: " + err.message);
     }
 }
 
-function countryName(land) {
-    if ( query.get('code') ) land = [land];
+if (query.get('name')) {
+    let name = query.get('name');
+    let url = name.length > 3 ? `https://restcountries.com/v3.1/name/${name}` : `https://restcountries.com/v3.1/alpha/${name}`;
+    sendCountry(url);
+}
 
-    let section1 = `
-        <section class="bandera">
-            <img src="${land[0].flag}" alt="">
-        </section>
-    `;
+const countryName = async (landObj) => {
 
-    let info = document.createElement("section");
-    info.classList.add("info");
+    const land = landObj.shift();
 
-    let info1 = `<div class="info-1">
-                    <h3>${land[0].name}</h3>
-        </div>`;
+    const templ = document.querySelector('#countryDetails'),
+        img = templ.content.querySelector(".bandera");
 
-    let info2 = `<div class="info-2">
-                    <p><b>Native Name:</b> ${land[0].nativeName}</p>
-                    <p><b>Population:</b> ${new Intl.NumberFormat("de-DE").format(land[0].population)}</p>
-                    <p><b>Region:</b> ${land[0].region}</p>
-                    <p><b>Sub Region:</b> ${land[0].subregion}</p>
-                    <p><b>Capital:</b> ${land[0].capital}</p>
-                </div>`;
+    // Imagen Bandera
+    img.children[0].src = land.flags.png;
 
-    let leng = document.createElement("p");
+    // Nombre del Pais
+    const info1 = templ.content.querySelector(".info-1");
+    info1.children[0].textContent = land.name.common;
 
-    for (const id in land[0].languages) {
-        if(id != 0) leng.textContent += ", ";
-        leng.textContent += land[0].languages[id].name;
+    // Informacion de Pais
+    const oficialName = Object.entries(land.name.nativeName)[0][1].official;
+
+    const info2 = templ.content.querySelector(".info-2");
+    info2.children[0].innerHTML += oficialName
+    info2.children[1].innerHTML += " " + new Intl.NumberFormat("de-DE").format(land.population);
+    info2.children[2].innerHTML += " " + land.region || "unknown";
+    info2.children[3].innerHTML += " " + land.subregion || "unknown";
+    info2.children[4].innerHTML += " " + land.capital || "unknown";
+
+    // Informacion Dominio de internet, moneda, lenguajes.
+    const languages = document.createElement("p");
+
+    languages.textContent = Object.values(land.languages).join(", ");
+
+    const currenciesName = land.currencies ? Object.entries(land.currencies)[0][1].name : "unknown";
+
+    const info3 = templ.content.querySelector(".info-3");
+    info3.children[0].innerHTML += land.tld.join(" ") || "unknown";
+    info3.children[1].innerHTML += currenciesName;
+    info3.children[2].innerHTML += languages.textContent || "unknown";
+
+
+    // Paises limitrofes
+    let listborder = "";
+
+    if (land.borders) {
+        let bordersTotal = [...land.borders].join(",");
+        const urlBorder = `https://restcountries.com/v3.1/alpha?codes=${bordersTotal}`;
+        let listName = await listBorder(urlBorder);
+        listName.forEach(name => listborder += `<a href="country.html?name=${name[1]}" class="border">${name[0]}</a>`);
     }
 
-    let info3 = `<div class="info-3">
-                    <p><b>Top Level Domain:</b> ${land[0].topLevelDomain}</p>
-                    <p><b>Currencies:</b> ${land[0].currencies[0].name}</p>
-                    <p><b>Lenguages:</b> ${leng.textContent}</p>
-                </div>`;
+    const info4 = templ.content.querySelector(".info-4");
+    info4.children[1].innerHTML = listborder;
 
-    let listborder="";
+    let clone = document.importNode(templ.content, true);
+    document.querySelector("#country").appendChild(clone);
+}
 
-    land[0].borders.forEach(id => listborder += `<a href="country.html?code=${id}" class="border">${id}</a>` );
-
-    let info4 = `<div class="info-4">
-                    <p><b>Border Countries:</b> </p>
-                    <div class="cont-border">
-                        ${listborder}
-                    </div>
-                </div>`;
-
-    info.innerHTML = info1;
-    info.innerHTML += info2;
-    info.innerHTML += info3;
-    info.innerHTML += info4;
-
-    document.querySelector("#country").innerHTML = section1;
-    document.querySelector("#country").append(info);
+// Pedido de paises limitrofes
+const listBorder = async (urlBorder) => {
+    const res = await fetch(urlBorder);
+    const country = await res.json();
+    return country.map(nC => [nC.name.common, nC.fifa]);
 }

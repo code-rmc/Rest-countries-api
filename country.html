@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
     <title>API Countries</title>
 </head>
+
 <body>
     <header>
         <h2>Where in the world?</h2>
@@ -21,10 +23,43 @@
 
         <article id="country">
             <!-- Country Details -->
+            <template id="countryDetails">
+                <section class="bandera">
+                    <img src="" alt="">
+                </section>
+
+                <section class="info">
+
+                    <div class="info-1">
+                        <h3></h3>
+                    </div>
+
+                    <div class="info-2">
+                        <p><b>Native Name:</b> </p>
+                        <p><b>Population:</b> </p>
+                        <p><b>Region:</b> </p>
+                        <p><b>Sub Region:</b> </p>
+                        <p><b>Capital:</b> </p>
+                    </div>
+
+                    <div class="info-3">
+                        <p><b>Top Level Domain:</b> </p>
+                        <p><b>Currencies:</b> </p>
+                        <p><b>Lenguages:</b> </p>
+                    </div>
+
+                    <div class="info-4">
+                        <p><b>Border Countries:</b> </p>
+                        <div class="cont-border">
+                        </div>
+                    </div>
+                </section>
+            </template>
         </article>
     </main>
 
-    <script src="js/app.js"></script>
+    <script src="js/darkMode.js"></script>
     <script src="js/country.js"></script>
 </body>
+
 </html>
